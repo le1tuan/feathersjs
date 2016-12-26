@@ -3,8 +3,10 @@
 module.exports = function(app) {
   return function(req, res, next) {
     // Perform actions
-
-
-    next();
+    const body = req.body;
+    app.service('users').create({
+      email: body.email,
+      password: body.password
+    }).then(user => res.redirect('/index.html')).catch(next);
   };
 };
